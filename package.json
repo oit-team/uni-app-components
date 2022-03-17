@@ -1,0 +1,37 @@
+{
+  "name": "@oit/uni-app-components",
+  "version": "1.0.0",
+  "description": "",
+  "author": "inlinger",
+  "scripts": {
+    "lint": "vue-cli-service lint"
+  },
+  "main": "lib/index.js",
+  "files": [
+    "src/",
+    "index.js"
+  ],
+  "dependencies": {
+    "eslint": "^7.32.0"
+  },
+  "devDependencies": {
+    "@oit/eslint-config": "^1.0.2",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/eslint-config-airbnb": "^6.0.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-vue": "^8.0.3",
+    "eslint-plugin-vuejs-accessibility": "^1.1.0",
+    "lint-staged": "^11.1.2"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.11"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "license": "ISC",
+  "publishConfig": {
+    "registry": "http://192.168.9.25:4873"
+  }
+}
