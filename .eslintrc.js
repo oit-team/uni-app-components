@@ -4,13 +4,14 @@ module.exports = {
     node: true,
   },
   extends: [
-    '@oit',
+    '@oit/eslint-config/uni-app',
   ],
   parserOptions: {
     ecmaVersion: 2020,
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+  },
+  globals: {
+    vue: 'readonly',
   },
 }

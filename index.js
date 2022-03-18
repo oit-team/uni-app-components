@@ -1,5 +1,3 @@
-import Icon from './src/Icon'
+export * from './src/config'
 
-export {
-  Icon,
-}
+export { default as Icon } from './src/components/Icon'
