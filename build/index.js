@@ -1,4 +1,5 @@
 const fs = require('fs')
+const { kebabCase } = require('lodash')
 
 const writeFileRecursive = function(path, buffer, callback) {
   let lastPath = path.substring(0, path.lastIndexOf('/'))
@@ -17,7 +18,8 @@ dir.forEach(component => {
     `/* eslint-disable */\n` +
     `import ${component} from '../src/components/${component}/${component}.vue'\n` +
     `export default ${component}`
-  writeFileRecursive(`./lib/Vc${component}.js`, content, (err) => {
+  const fileName = kebabCase(`Vc${component}`)
+  writeFileRecursive(`./lib/${fileName}.js`, content, (err) => {
     if (err) console.error(err)
   })
 })
