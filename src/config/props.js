@@ -1,1 +1,6 @@
-export { default as Icon } from '../components/Icon/props'
+export { props as Icon } from '../components/Icon'
+export { props as Img } from '../components/Img'
+export { props as Anchor } from '../components/Anchor'
+export { props as AnchorIndex } from '../components/AnchorIndex'
+export { props as RadioGroup } from '../components/RadioGroup'
+export { props as RadioItem } from '../components/RadioItem'
