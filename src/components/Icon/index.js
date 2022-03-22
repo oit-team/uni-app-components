@@ -1,3 +1,5 @@
-import Icon from './Icon.vue'
+import Icon, { props } from './Icon.vue'
+
+export { props }
 
 export default Icon

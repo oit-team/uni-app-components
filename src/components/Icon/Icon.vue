@@ -1,14 +1,21 @@
 <template>
-  <component :is="tag" v-bind="attrs" />
+  <component :is="tag" v-bind="attrs" @click="$emit('click', $event)" />
 </template>
 
 <script>
-import { createNamespace } from '../../utils'
-import props from './props'
+import { createNamespace, convertToUnit } from '../../utils'
 
 const [name] = createNamespace('Icon')
 
 const UNI_ICONS = 'uni'
+
+export const props = {
+  name: String,
+  size: [String, Number],
+  color: String,
+  prefix: String,
+  source: String,
+}
 
 export default {
   name,
@@ -36,11 +43,12 @@ export default {
       }
     },
     iconName() {
-      return `icon-${this.name}`
+      const prefix = this.prefix ? `${this.prefix}-` : ''
+      if (new RegExp(`^${prefix}`).test(this.name)) return this.name
+      return `${prefix}${this.name}`
     },
     iconSize() {
-      const configSize = this.size
-      return isNaN(Number(configSize)) ? configSize : `${configSize}rpx`
+      return convertToUnit(this.size)
     },
   },
 
@@ -51,9 +59,5 @@ export default {
 </script>
 
 <style lang="scss">
-$uni-color-primary: red !default;
-
-.vc-icon {
-  color: $uni-color-primary;
-}
+.vc-icon {}
 </style>
