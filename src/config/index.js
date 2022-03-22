@@ -1,5 +1,6 @@
 import { isArray, isPlainObject, merge } from 'lodash'
 import * as props from './props'
+import options from './options'
 
 function setPropItemContent(propItem) {
   if (isPlainObject(propItem) || isArray(propItem)) return () => propItem
@@ -11,10 +12,12 @@ function getPropItemContent(propItem) {
   return propItem
 }
 
-export function setConfig(config) {
-  if (!isPlainObject(config)) throw new TypeError('config 必须是一个普通对象')
-
-  Object.entries(config).forEach(([name, propsData]) => {
+/**
+ * 配置组件props默认值
+ * @param propsConfig
+ */
+function setPropsConfig(propsConfig) {
+  Object.entries(propsConfig).forEach(([name, propsData]) => {
     const targetProps = props[name]
 
     if (!targetProps) {
@@ -58,6 +61,14 @@ export function setConfig(config) {
   })
 }
 
+export function setConfig(config) {
+  if (!isPlainObject(config)) throw new TypeError('config 必须是一个普通对象')
+  if (isPlainObject(config.props)) setPropsConfig(config.props)
+  if (isPlainObject(config.options)) merge(options, config.options)
+}
+
 export default {
   setConfig,
+  props,
+  options,
 }
