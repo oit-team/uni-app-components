@@ -26,7 +26,7 @@ export default {
     },
     classes() {
       return {
-        [this.radioGroup['active-class'] ?? 'vc-radio-item--active']: this.active,
+        [this.radioGroup.activeClass]: this.active,
       }
     },
   },

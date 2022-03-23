@@ -7,7 +7,10 @@
 <script>
 export const props = {
   value: {},
-  activeClass: String,
+  activeClass: {
+    type: String,
+    default: 'vc-radio-item--active',
+  },
 }
 
 export default {
@@ -31,7 +34,8 @@ export default {
       immediate: true,
       handler() {
         this.innerValue = this.value
-      },
+      }
+      ,
     },
     innerValue(value) {
       this.$emit('change', value)
