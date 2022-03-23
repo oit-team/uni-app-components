@@ -6,6 +6,7 @@
       :style="styles"
       :src="innerSrc"
       lazy-load
+      @load="onLoaded"
     />
   </div>
 </template>
@@ -27,6 +28,11 @@ export default {
 
   props,
 
+  data: () => ({
+    naturalWidth: 0,
+    naturalHeight: 0,
+  }),
+
   computed: {
     sizeable() {
       return {
@@ -35,7 +41,10 @@ export default {
       }
     },
     styles() {
-      return {}
+      return {
+        width: convertToUnit(this.naturalWidth),
+        height: convertToUnit(this.naturalHeight),
+      }
     },
     innerSrc() {
       if (process.env.NODE_ENV !== 'production' && /^lorem/.test(this.src)) {
@@ -43,6 +52,13 @@ export default {
       }
 
       return this.src
+    },
+  },
+
+  methods: {
+    onLoaded(e) {
+      this.naturalWidth = e.detail.width
+      this.naturalHeight = e.detail.height
     },
   },
 }
