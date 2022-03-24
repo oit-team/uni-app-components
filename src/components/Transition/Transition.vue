@@ -15,6 +15,33 @@
 /* eslint-disable */
 import { createAnimation } from './createAnimation'
 
+export const props = {
+  show: {
+    type: Boolean,
+    default: false,
+  },
+  modeClass: {
+    type: [Array, String],
+    default() {
+      return 'fade'
+    },
+  },
+  duration: {
+    type: Number,
+    default: 300,
+  },
+  styles: {
+    type: Object,
+    default() {
+      return {}
+    },
+  },
+  customClass: {
+    type: String,
+    default: '',
+  },
+}
+
 /**
  * Transition 过渡动画
  * @description 简单过渡动画组件
@@ -34,32 +61,7 @@ import { createAnimation } from './createAnimation'
 export default {
   name: 'VcTransition',
   emits: ['click', 'change'],
-  props: {
-    show: {
-      type: Boolean,
-      default: false,
-    },
-    modeClass: {
-      type: [Array, String],
-      default() {
-        return 'fade'
-      },
-    },
-    duration: {
-      type: Number,
-      default: 300,
-    },
-    styles: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
-    customClass: {
-      type: String,
-      default: '',
-    },
-  },
+  props,
   data() {
     return {
       isShow: false,

@@ -1,4 +1,4 @@
-import Anchor, { props } from './Anchor.vue'
+import Anchor, { props } from './Anchor'
 
 export { props }
 

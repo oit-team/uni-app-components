@@ -1,4 +1,4 @@
-import Icon, { props } from './Icon.vue'
+import Icon, { props } from './Icon'
 
 export { props }
 

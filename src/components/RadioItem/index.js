@@ -1,4 +1,4 @@
-import RadioItem, { props } from './RadioItem.vue'
+import RadioItem, { props } from './RadioItem'
 
 export { props }
 

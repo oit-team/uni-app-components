@@ -1,4 +1,4 @@
-import AnchorIndex, { props } from './AnchorIndex.vue'
+import AnchorIndex, { props } from './AnchorIndex'
 
 export { props }
 

@@ -1,4 +1,4 @@
-import Img, { props } from './Img.vue'
+import Img, { props } from './Img'
 
 export { props }
 

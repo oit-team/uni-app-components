@@ -1,4 +1,4 @@
-import RadioGroup, { props } from './RadioGroup.vue'
+import RadioGroup, { props } from './RadioGroup'
 
 export { props }
 

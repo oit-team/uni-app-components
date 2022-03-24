@@ -1,3 +1,5 @@
-import Transition from './Transition.vue'
+import Transition, { props } from './Transition'
+
+export { props }
 
 export default Transition
