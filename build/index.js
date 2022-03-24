@@ -15,8 +15,8 @@ const writeFileRecursive = function(path, buffer, callback) {
 const dir = fs.readdirSync('src/components')
 dir.forEach(component => {
   const content =
-    `/* eslint-disable */\n` +
-    `import ${component} from '../src/components/${component}/${component}.vue'\n` +
+    `import ${component}, { props } from '../src/components/${component}'\n` +
+    `export { props }\n` +
     `export default ${component}`
   const fileName = kebabCase(`Vc${component}`)
   writeFileRecursive(`./lib/${fileName}.js`, content, (err) => {
