@@ -1,5 +1,5 @@
 <template>
-  <div class="vc-img" :style="sizeable">
+  <div class="vc-img" :style="sizeable" @click="$emit('click', $event)">
     <image
       v-bind="$attrs"
       class="vc-img__image"
