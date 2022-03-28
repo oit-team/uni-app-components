@@ -32,13 +32,16 @@ export default {
   name,
 
   props: {
-    item: Object,
+    item: [Object, String],
     active: Boolean,
   },
 
   watch: {
     active() {
       this.togglePlay()
+    },
+    item() {
+      this.active && this.togglePlay()
     },
   },
 
@@ -64,10 +67,12 @@ export default {
       if (typeof item === 'object') return item[key]
     },
     togglePlay() {
-      const { video } = this.$refs
-      if (video) {
-        this.active ? video.play() : video.pause()
-      }
+      this.$nextTick(() => {
+        const { video } = this.$refs
+        if (video) {
+          this.active ? video.play() : video.pause()
+        }
+      })
     },
   },
 }

@@ -7,15 +7,16 @@
         size="28"
         @click="close()"
       />
-      <swiper class="vc-preview-swiper" @change="innerIndex = $event.detail.current">
+      <swiper class="vc-preview-swiper" @change="innerIndex = $event.detail.current" :current="swiperCurrent">
         <swiper-item
-          v-for="(item, itemIndex) of getList()"
-          :key="keyValue in item ? item[keyValue] : itemIndex"
+          v-for="(item, itemIndex) of config.list"
+          :key="(typeof item === 'object' && keyValue in item) ? item[keyValue] : itemIndex"
           class="vc-preview-swiper-item"
         >
           <preview-item :item="item" :active="innerIndex === itemIndex" @click="close()" />
         </swiper-item>
       </swiper>
+      <slot name="overlay"></slot>
     </div>
   </vc-transition>
 </template>
@@ -53,29 +54,29 @@ export default {
 
   data: () => ({
     show: false,
+    params: {},
     innerIndex: 0,
+    swiperCurrent: 0,
   }),
 
   computed: {
     config() {
-      return {}
+      return {
+        list: this.list ?? this.params.list,
+        index: this.index ?? this.params.index,
+      }
     },
-  },
-
-  created() {
-    this.params = {}
   },
 
   methods: {
     open(params) {
       this.params = params
       this.show = true
+      this.swiperCurrent = this.config.index
+      this.innerIndex = this.config.index
     },
     close() {
       this.show = false
-    },
-    getList() {
-      return this.list ?? this.params.list
     },
   },
 }
