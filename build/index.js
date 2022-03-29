@@ -1,5 +1,8 @@
 const fs = require('fs')
+const rimraf = require('rimraf')
 const { kebabCase } = require('lodash')
+
+rimraf('lib', () => {})
 
 const writeFileRecursive = function(path, buffer, callback) {
   let lastPath = path.substring(0, path.lastIndexOf('/'))
@@ -12,6 +15,8 @@ const writeFileRecursive = function(path, buffer, callback) {
   })
 }
 
+// ===============导出每个组件===============
+
 const dir = fs.readdirSync('src/components')
 dir.forEach(component => {
   const content =
@@ -22,4 +27,23 @@ dir.forEach(component => {
   writeFileRecursive(`./lib/${fileName}.js`, content, (err) => {
     if (err) console.error(err)
   })
+})
+
+// ===============导出index.js文件===============
+
+let indexImportContent = ''
+let indexExportContent = `export * from '../src/config'\n\nexport {\n$exportComponents$}`
+let exportComponents = ''
+
+dir.forEach(component => {
+  indexImportContent += `import ${component} from '../src/components/${component}'\n`
+  exportComponents += `  ${component},\n`
+})
+
+indexExportContent = indexExportContent.replace('$exportComponents$', exportComponents)
+
+const indexContent = `${indexImportContent}\n${indexExportContent}`
+
+writeFileRecursive(`./lib/index.js`, indexContent, (err) => {
+  if (err) console.error(err)
 })

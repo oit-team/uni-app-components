@@ -17,7 +17,7 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "@oit/eslint-config": "^1.0.3",
+    "@oit/eslint-config": "^1.0.7",
     "@vue/cli-plugin-eslint": "~4.5.15",
     "@vue/cli-service": "~4.5.15",
     "@vue/eslint-config-airbnb": "^5.0.2",
