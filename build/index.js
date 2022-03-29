@@ -2,7 +2,9 @@ const fs = require('fs')
 const rimraf = require('rimraf')
 const { kebabCase } = require('lodash')
 
-rimraf('lib', () => {})
+const outputDir = 'lib'
+
+rimraf(outputDir, () => {})
 
 const writeFileRecursive = function(path, buffer, callback) {
   let lastPath = path.substring(0, path.lastIndexOf('/'))
@@ -24,7 +26,7 @@ dir.forEach(component => {
     `export { props }\n` +
     `export default ${component}`
   const fileName = kebabCase(`Vc${component}`)
-  writeFileRecursive(`./lib/${fileName}.js`, content, (err) => {
+  writeFileRecursive(`./${outputDir}/${fileName}.js`, content, (err) => {
     if (err) console.error(err)
   })
 })
@@ -44,6 +46,6 @@ indexExportContent = indexExportContent.replace('$exportComponents$', exportComp
 
 const indexContent = `${indexImportContent}\n${indexExportContent}`
 
-writeFileRecursive(`./lib/index.js`, indexContent, (err) => {
+writeFileRecursive(`./${outputDir}/index.js`, indexContent, (err) => {
   if (err) console.error(err)
 })
