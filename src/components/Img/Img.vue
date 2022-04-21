@@ -3,7 +3,7 @@
     <image
       v-bind="$attrs"
       class="vc-img__image"
-      :style="styles"
+      :style="naturalSize"
       :src="innerSrc"
       lazy-load
       @load="onLoaded"
@@ -40,7 +40,7 @@ export default {
         height: convertToUnit(this.height) || convertToUnit(this.size),
       }
     },
-    styles() {
+    naturalSize() {
       return {
         width: convertToUnit(this.naturalWidth),
         height: convertToUnit(this.naturalHeight),
