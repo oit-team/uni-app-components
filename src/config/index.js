@@ -33,27 +33,28 @@ function setPropsConfig(propsConfig) {
         return
       }
 
-      // prop默认值是否已定义
-      if (
-        isPlainObject(targetPropItem)
-        && targetPropItem.type
-        && 'default' in targetPropItem
-        && typeof targetPropItem.default === 'function'
-      ) {
-        const targetPropItemValue = targetPropItem.default
-        const propType = isArray(targetPropItem.type) ? targetPropItem.type : [targetPropItem.type]
+      // targetPropItem 是普通对象时的处理
+      if (isPlainObject(targetPropItem)) {
+        if ('type' in targetPropItem) {
+          const targetPropType = isArray(targetPropItem.type) ? targetPropItem.type : [targetPropItem.type]
+          const targetPropValue = targetPropItem.default
 
-        // 处理对象或数组
-        if (propType.includes(Object)) {
-          // 合并对象
-          targetPropItem.default = () => merge(targetPropItemValue(), getPropItemContent(propItem))
-        } else if (propType.includes(Array)) {
-          // 合并数组
-          targetPropItem.default = () => targetPropItemValue().concat(getPropItemContent(propItem))
+          // 处理对象或数组
+          if (typeof targetPropItem.default === 'function') {
+            if (targetPropType.includes(Object)) {
+              // 合并对象
+              targetPropItem.default = () => merge(targetPropValue(), getPropItemContent(propItem))
+            } else if (targetPropType.includes(Array)) {
+              // 合并数组
+              targetPropItem.default = () => targetPropValue().concat(getPropItemContent(propItem))
+            }
+          }
+        } else {
+          targetPropItem.default = setPropItemContent(propItem)
         }
       } else {
         targetProps[propKey] = {
-          type: targetProps[propKey],
+          type: targetPropItem,
           default: setPropItemContent(propItem),
         }
       }
