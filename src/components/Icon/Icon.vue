@@ -59,5 +59,8 @@ export default {
 </script>
 
 <style lang="scss">
-.vc-icon {}
+.vc-icon {
+  display: inline-flex;
+  line-height: initial;
+}
 </style>
