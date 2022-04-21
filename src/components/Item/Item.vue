@@ -1,0 +1,75 @@
+<template>
+  <component :is="tag" :class="classes" @click="onToggle()">
+    <slot :active="active"></slot>
+  </component>
+</template>
+
+<script>
+import { createNamespace } from '../../utils'
+
+const [name] = createNamespace('Item')
+
+export const props = {
+  tag: {
+    type: String,
+    default: 'div',
+  },
+  value: {
+    required: false,
+  },
+}
+
+export default {
+  name,
+
+  inject: {
+    ItemGroup: {
+      default: undefined,
+    },
+  },
+
+  props,
+
+  data: () => ({
+    itemValue: undefined,
+  }),
+
+  computed: {
+    active() {
+      if (this.ItemGroup?.multiple) {
+        return this.ItemGroup.innerValue.includes(this.itemValue)
+      }
+
+      return this.ItemGroup?.innerValue === this.itemValue
+    },
+    classes() {
+      return [
+        this.active ? this.ItemGroup?.activeClass : '',
+      ]
+    },
+  },
+
+  created() {
+    if (!this.ItemGroup) throw new TypeError('Item组件必须在ItemGroup组件下使用')
+    this.register()
+  },
+
+  destroyed() {
+    this.ItemGroup.unregister(this)
+  },
+
+  methods: {
+    register() {
+      const index = this.ItemGroup.register(this)
+      this.itemValue = this.value ?? index
+    },
+    onToggle() {
+      this.ItemGroup.toggle(this)
+    },
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
