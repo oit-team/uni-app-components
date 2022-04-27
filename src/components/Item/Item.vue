@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" :class="classes" @click="onToggle()">
+  <component :is="tag" :class="classes" @click="onToggle">
     <slot :active="active"></slot>
   </component>
 </template>
@@ -63,8 +63,9 @@ export default {
       const index = this.ItemGroup.register(this)
       this.itemValue = this.value ?? index
     },
-    onToggle() {
+    onToggle(e) {
       this.ItemGroup.toggle(this)
+      this.$emit('click', e)
     },
   },
 }

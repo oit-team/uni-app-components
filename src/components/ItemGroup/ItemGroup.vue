@@ -52,6 +52,9 @@ export default {
   },
 
   watch: {
+    value() {
+      this.innerValue = this.value
+    },
     innerValue(value) {
       this.$emit('change', value)
     },
@@ -76,7 +79,7 @@ export default {
           this.innerValue.push(firstItemValue)
         }
       } else {
-        this.innerValue = firstItemValue
+        this.innerValue = this.innerValue ?? firstItemValue
       }
     },
     toggle(item) {
