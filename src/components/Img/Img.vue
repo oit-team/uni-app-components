@@ -2,6 +2,7 @@
   <div class="vc-img" :style="sizeable" @click="$emit('click', $event)">
     <image
       v-bind="$attrs"
+      mode="aspectFit"
       class="vc-img__image"
       :style="naturalSize"
       :src="innerSrc"
