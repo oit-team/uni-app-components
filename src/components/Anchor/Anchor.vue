@@ -1,5 +1,5 @@
 <template>
-  <div class="vc-anchor">
+  <div class="vc-anchor" v-on="$listeners">
     <slot></slot>
   </div>
 </template>
@@ -31,6 +31,7 @@ export default {
   },
 
   created() {
+    this.indexRecord = 0
     this.observer = null
     this.observeMap = new Map()
   },
@@ -69,9 +70,9 @@ export default {
               const keyIndex = componentList.indexOf(activeComponent)
               if (top) {
                 const prevComponent = componentList[Math.max(keyIndex - 1, 0)]
-                this.index = prevComponent.index
+                this.index = prevComponent.innerIndex
               } else {
-                this.index = activeComponent.index
+                this.index = activeComponent.innerIndex
               }
             }
           }
@@ -79,14 +80,16 @@ export default {
       }, options)
     },
     register(item) {
+      const indexRecord = this.indexRecord++
       if (this._isMounted && this.observeMap.size !== 0) console.error('检测到动态添加的 AnchorIndex，可能无法确保顺序')
       this.$nextTick(() => {
-        this.observeMap.set(item.index, item)
+        this.observeMap.set(item.innerIndex, item)
         this.observer.observe(item.$el)
       })
+      return indexRecord
     },
     unregister(item) {
-      this.observeMap.delete(item.index)
+      this.observeMap.delete(item.innerIndex)
       this.observer.unobserve(item.$el)
     },
     setIndex(index) {

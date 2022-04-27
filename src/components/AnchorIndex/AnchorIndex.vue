@@ -1,6 +1,6 @@
 <template>
   <div class="vc-anchor-index">
-    <slot :active="active"></slot>
+    <slot v-bind="{ active, index: innerIndex }"></slot>
   </div>
 </template>
 
@@ -20,14 +20,19 @@ export default {
 
   props,
 
+  data: () => ({
+    innerIndex: null,
+  }),
+
   computed: {
     active() {
-      return this.anchor?.index === this.index
+      return this.anchor?.index === this.innerIndex
     },
   },
 
   mounted() {
-    this.anchor.register(this)
+    const index = this.anchor.register(this)
+    this.innerIndex = this.index ?? index
   },
 
   destroyed() {
@@ -38,12 +43,12 @@ export default {
 
 <style scoped>
 .vc-anchor-index::after {
-  content: '';
   position: absolute;
-  display: inline-block;
-  height: 10px;
-  width: 10px;
   top: -10px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  content: '';
   background: red;
 }
 </style>
