@@ -2,7 +2,7 @@
   <div class="vc-img" :style="sizeable" @click="$emit('click', $event)">
     <image
       v-bind="$attrs"
-      mode="aspectFit"
+      :mode="mode"
       class="vc-img__image"
       :style="naturalSize"
       :src="innerSrc"
@@ -22,6 +22,10 @@ export const props = {
   width: [String, Number],
   height: [String, Number],
   size: [String, Number],
+  mode: {
+    type: String,
+    default: 'aspectFit',
+  },
 }
 
 export default {
@@ -43,8 +47,9 @@ export default {
     },
     naturalSize() {
       return {
-        width: convertToUnit(this.naturalWidth),
-        height: convertToUnit(this.naturalHeight),
+        // width: convertToUnit(this.naturalWidth),
+        // height: convertToUnit(this.naturalHeight),
+        aspectRatio: `${this.naturalWidth}/${this.naturalHeight}`,
       }
     },
     innerSrc() {
@@ -74,8 +79,8 @@ export default {
 
 .vc-img__image {
   width: 100%;
-  height: 100%;
   max-width: 100%;
+  height: 100%;
   max-height: 100%;
 }
 </style>
