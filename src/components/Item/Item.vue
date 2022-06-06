@@ -43,9 +43,9 @@ export default {
       return this.ItemGroup?.innerValue === this.itemValue
     },
     classes() {
-      return [
-        this.active ? this.ItemGroup?.activeClass : '',
-      ]
+      const activeClass = (this.ItemGroup?.activeClass ?? '').split(' ')
+      const inactiveClass = (this.ItemGroup?.inactiveClass ?? '').split(' ')
+      return this.active ? activeClass : inactiveClass
     },
   },
 
@@ -72,5 +72,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

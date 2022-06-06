@@ -23,6 +23,7 @@ export const props = {
     type: [String, Object, Array],
     default: 'vc-item--active',
   },
+  inactiveClass: [String, Object, Array],
   // 必须选择一项
   mandatory: Boolean,
   // 允许多选

@@ -47,14 +47,16 @@ export default {
     },
     naturalSize() {
       return {
+        /* #ifndef APP-NVUE */
         // width: convertToUnit(this.naturalWidth),
         // height: convertToUnit(this.naturalHeight),
         aspectRatio: `${this.naturalWidth}/${this.naturalHeight}`,
+        /* #endif */
       }
     },
     innerSrc() {
       if (process.env.NODE_ENV !== 'production' && /^lorem/.test(this.src)) {
-        return this.src.replace('lorem', `https://picsum.photos/seed/${Math.random()}/`)
+        return this.src.replace('lorem', `https://picsum.photos/seed/${Math.random()}`)
       }
 
       return this.src

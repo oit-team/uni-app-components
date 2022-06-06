@@ -64,8 +64,13 @@ function setPropsConfig(propsConfig) {
 
 export function setConfig(config) {
   if (!isPlainObject(config)) throw new TypeError('config 必须是一个普通对象')
-  if (isPlainObject(config.props)) setPropsConfig(config.props)
   if (isPlainObject(config.options)) merge(options, config.options)
+  if (isPlainObject(config.props)) setPropsConfig(config.props)
+}
+
+uni.$vc = {
+  props,
+  options,
 }
 
 export default {

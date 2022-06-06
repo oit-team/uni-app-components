@@ -13,5 +13,6 @@ module.exports = {
   },
   globals: {
     vue: 'readonly',
+    weex: 'readonly',
   },
 }

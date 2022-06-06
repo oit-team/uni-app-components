@@ -117,6 +117,7 @@ export default {
               this.index * this.pageSize >= total ? options.done() : options.next()
             })
             .catch(options.fail)
+          return promise
         }
       } else {
         this.$emit('load', options)
