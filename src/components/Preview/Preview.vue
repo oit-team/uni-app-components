@@ -7,7 +7,12 @@
         size="28"
         @click="close()"
       />
-      <swiper class="vc-preview-swiper" @change="innerIndex = $event.detail.current" :current="swiperCurrent">
+      <swiper
+        class="vc-preview-swiper"
+        :current="swiperCurrent"
+        @change="innerIndex = $event.detail.current"
+        @transition="transition"
+      >
         <swiper-item
           v-for="(item, itemIndex) of config.list"
           :key="(typeof item === 'object' && keyValue in item) ? item[keyValue] : itemIndex"
@@ -78,6 +83,9 @@ export default {
     close() {
       this.show = false
     },
+    transition(e) {
+      console.log(e)
+    },
   },
 }
 </script>
@@ -115,11 +123,11 @@ export default {
 
 .vc-preview__close {
   position: absolute;
+  z-index: 50;
   top: 25px;
   right: 25px;
   padding: 5px;
   border-radius: 50%;
   background-color: rgba(150, 150, 150, 0.5);
-  z-index: 50;
 }
 </style>

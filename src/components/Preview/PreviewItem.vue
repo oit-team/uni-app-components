@@ -23,7 +23,7 @@
 <script>
 import { createNamespace } from '../../utils'
 
-const IMAGE_TYPES = ['png', 'jpg']
+const IMAGE_TYPES = ['png', 'jpg', 'jpeg']
 const VIDEO_TYPES = ['mp4']
 
 const [name] = createNamespace('PreviewItem')
@@ -69,9 +69,10 @@ export default {
     togglePlay() {
       this.$nextTick(() => {
         const { video } = this.$refs
-        if (video) {
-          this.active ? video.play() : video.pause()
-        }
+        console.log(video)
+        // if (video) {
+        //   this.active ? video.play() : video.pause()
+        // }
       })
     },
   },
@@ -80,9 +81,12 @@ export default {
 
 <style>
 .vc-preview-item,
-.vc-preview-item__image,
-.vc-preview-item__video {
+.vc-preview-item__image {
   width: 100%;
   height: 100%;
+}
+
+.vc-preview-item__video {
+  background-color: red;
 }
 </style>
